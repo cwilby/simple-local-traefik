@@ -53,7 +53,7 @@ This project focuses on the simplest steps needed to setup a local Traefik envir
       --network web \
       --label "traefik.enable=true"
       --label "traefik.http.routers.my-site.entryPoints=https"
-      --label "traefik.http.routers.my-site.rule=Host(my-site.test)"
+      --label "traefik.http.routers.my-site.rule=Host(`my-site.test`)"
       --label "traefik.http.routers.my-site.tls=true"
     ```
 
@@ -73,7 +73,7 @@ This project focuses on the simplest steps needed to setup a local Traefik envir
         labels:
           - traefik.enable=true
           - traefik.http.routers.my-site.entryPoints=https
-          - traefik.http.routers.my-site.rule=Host(my-site.test)
+          - traefik.http.routers.my-site.rule=Host(`my-site.test`)
           - traefik.http.routers.my-site.tls=true
     ```
 
