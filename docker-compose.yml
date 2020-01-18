@@ -1,0 +1,25 @@
+version: "3.7"
+
+networks:
+  web:
+    external: true
+
+services:
+  traefik:
+    image: traefik:latest
+    ports:
+      - 127.0.0.1:80:80
+      - 127.0.0.1:443:443
+    networks:
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.entryPoints=https
+      - traefik.http.routers.traefik.rule=Host(`traefik.test`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+      - traefik.http.routers.traefik.tls=true
+      - traefik.http.routers.traefik.service=api@internal
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./dynamic:/etc/traefik/dynamic:ro
+      - ./certs:/etc/certs:ro
