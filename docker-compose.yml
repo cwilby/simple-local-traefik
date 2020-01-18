@@ -15,6 +15,7 @@ services:
       - web
     labels:
       - traefik.enable=true
+      - traefik.docker.network=web
       - traefik.http.routers.traefik.entrypoints=https
       - traefik.http.routers.traefik.rule=Host(`traefik.test`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
       - traefik.http.routers.traefik.tls=true
