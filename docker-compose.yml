@@ -14,10 +14,14 @@ services:
       - web
     labels:
       - traefik.enable=true
-      - traefik.http.routers.traefik.entryPoints=https
+      - traefik.http.routers.traefik.entrypoints=https
       - traefik.http.routers.traefik.rule=Host(`traefik.test`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.service=api@internal
+      - traefik.http.routers.globalredirect.rule=hostregexp(`{host:[a-z-.]+}`)
+      - traefik.http.routers.globalredirect.entrypoints=http
+      - traefik.http.routers.globalredirect.middlewares=redirect-to-https
+      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
