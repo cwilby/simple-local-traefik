@@ -1,3 +1,4 @@
-[[tls.certificate]]
-  certFile = "/etc/certs/local.crt"
-  keyFile = "/etc/certs/local-key.pem"
+tls:
+  certificates:
+    - certFile: /etc/certs/local.crt
+      keyFile: /etc/certs/local-key.pem
